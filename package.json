@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "deeplearn": "^0.5.1",
-    "deeplearn-knn-image-classifier": "^0.3.0"
+    "deeplearn-knn-image-classifier": "^0.3.0",
+    "rc-progress": "^2.2.5"
   }
 }

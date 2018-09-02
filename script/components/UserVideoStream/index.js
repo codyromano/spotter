@@ -5,18 +5,19 @@ export default class UserVideoStream extends React.Component {
   constructor(props) {
     super(props);
     this.onVideoStreamUpdated = this.onVideoStreamUpdated.bind(this);
+    this.videoDataNode = document.createElement('video');
   }
   componentDidMount() {
-    this.videoNode.width = this.props.imageSize;
-    this.videoNode.height = this.props.imageSize;
+    this.videoDataNode.width = this.props.imageSize;
+    this.videoDataNode.height = this.props.imageSize;
+
     this.videoNode.setAttribute('autoplay', '');
     this.videoNode.setAttribute('playsinline', '');
 
     navigator.mediaDevices.getUserMedia({video: true, audio: false})
     .then((stream) => {
-      this.videoNode.width = this.props.imageSize;
-      this.videoNode.height = this.props.imageSize;
       this.videoNode.srcObject = stream;
+      this.videoDataNode.srcObject = stream;
     });
 
     this.videoNode.addEventListener('playing', ()=> this.videoPlaying = true);
@@ -28,7 +29,7 @@ export default class UserVideoStream extends React.Component {
   }
   onVideoStreamUpdated() {
     if (this.videoPlaying) {
-      this.props.onVideoStreamUpdated(this.videoNode);
+      this.props.onVideoStreamUpdated(this.videoDataNode);
     }
     window.requestAnimationFrame(this.onVideoStreamUpdated);
   }
@@ -37,9 +38,12 @@ export default class UserVideoStream extends React.Component {
   }
   render() {
     return (
-      <video ref={(node) => {
-        this.videoNode = node;
-      }} />
+      <video
+        style={{ width: '100%', height: '100%' }}
+        ref={(node) => {
+          this.videoNode = node;
+        }}
+      />
     )
   }
 }

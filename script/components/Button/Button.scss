@@ -1,0 +1,12 @@
+@import '../manifest.scss';
+
+.button {
+  @include basicReset;
+
+  font-size: 1.25rem;
+  text-decoration: none;
+  padding: 0.5em 1em;
+  background-color: $color-accent;
+  color: $color-accent-contrast;
+  cursor: pointer;
+}

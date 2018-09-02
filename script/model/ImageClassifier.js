@@ -35,6 +35,11 @@ export default class ImageClassifier {
     // imagePixelData.dispose();
   }
 
+  getExamplesForClass(classId) {
+    const classMetadataIndex = this.mapClassIdToIndex[classId];
+    return this.knn.getClassExampleCount()[classMetadataIndex];
+  }
+
   predict(imagePixelData, confidenceThreshold = 80) {
     const exampleCount = this.knn.getClassExampleCount();
     if (exampleCount < 1) {

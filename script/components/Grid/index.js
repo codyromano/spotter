@@ -1,8 +1,12 @@
 import React from 'react';
 import styles from './Grid.scss';
 
-export const GridContainer = ({ children }) => (
-  <div className="grid-container">
-    {children}
+export const GridContainer = (props) => (
+  <div className="grid-container" {...props}>
+    {props.children}
   </div>
+);
+
+export const GridCol = (props) => (
+  <div className="grid-col" {...props}>{props.children}</div>
 );
