@@ -7,7 +7,7 @@ import styles from './Header.scss';
 const Header = ({ title }) => (
   <header className="header">
     <GridContainer>
-      <div class="header-content">
+      <div className="header-content">
         {title}
       </div>
     </GridContainer>
