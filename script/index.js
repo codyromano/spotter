@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { render } from 'react-dom';
 
+import Header from './components/Header';
+
 const App = () => (
-  <div>Spotter: using AI to detect dangerous workout postures</div>
+  <Header title="Spotter" />
 );
 
 render(<App />, document.getElementById('root'));

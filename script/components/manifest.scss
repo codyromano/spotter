@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Hind');
+
+@mixin basicReset {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+$color-accent: #96A492;
+$color-accent-contrast: #fff;
+
+$font-base: 'Hind', sans-serif;
+
+$grid-container-max-width: 60rem;
+$grid-column-gutter: 1.5rem;
+
+body, #root {
+  @include basicReset;
+}

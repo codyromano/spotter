@@ -1,0 +1,11 @@
+@import '../manifest.scss';
+
+.header {
+  background-color: $color-accent;
+  color: $color-accent-contrast;
+}
+.header-content {
+  height: 5rem;
+  display: flex;
+  align-items: center;
+}
