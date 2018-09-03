@@ -29,7 +29,7 @@ export const PrivacyNotice = () => (
 
 export const IntroPage = () => (
   <TrainerDialogue>
-    <h1>I&apos;m Spotter, a physical therapy AI.</h1>
+    <h1>I&apos;m Spotter, a physical therapy assistant.</h1>
     <p>Proper form is key to preventing injuries. I&apos;ll tell you when your exercise posture is incorrect. </p>
     <Button to={routes.PRIVACY}>Get Started</Button>
   </TrainerDialogue>

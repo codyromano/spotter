@@ -1,28 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from './UserVideoStream.scss';
 
 export default class UserVideoStream extends React.Component {
   constructor(props) {
     super(props);
     this.onVideoStreamUpdated = this.onVideoStreamUpdated.bind(this);
-    this.videoDataNode = document.createElement('video');
   }
   componentDidMount() {
     this.videoNode.setAttribute('autoplay', '');
     this.videoNode.setAttribute('playsinline', '');
 
-    // We need two streams because one must be 227 pixels for SqueezeNet
-    navigator.mediaDevices.getUserMedia({video: true, audio: false})
-      .then((stream) => {
-        this.videoDataNode.width = this.props.imageSize;
-        this.videoDataNode.height = this.props.imageSize;
-        this.videoDataNode.srcObject = stream;
-      });
-
     navigator.mediaDevices.getUserMedia({video: true, audio: false})
     .then((stream) => {
-      this.videoNode.width = this.props.imageSize;
-      this.videoNode.height = this.props.imageSize;
       this.videoNode.srcObject = stream;
     });
 
@@ -35,7 +25,9 @@ export default class UserVideoStream extends React.Component {
   }
   onVideoStreamUpdated() {
     // TODO: Debounce this method to improve performance
-    if (this.videoPlaying) {
+    if (this.videoPlaying && this.videoNode) {
+      this.videoNode.width = this.props.imageSize;
+      this.videoNode.height = this.props.imageSize;
       this.props.onVideoStreamUpdated(this.videoNode);
     }
     window.requestAnimationFrame(this.onVideoStreamUpdated);

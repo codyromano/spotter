@@ -1,7 +1,9 @@
+@import '../manifest.scss';
+
 .train-container {
-  height: 25rem;
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   align-content: center;
   justify-content: center;
 }

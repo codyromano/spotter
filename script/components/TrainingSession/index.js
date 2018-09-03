@@ -66,30 +66,31 @@ class TrainingSession extends React.Component {
           <section className="train-container">
             <GridCol className="instructions">
               {this.props.instructions}
-              {!this.state.recording && (
-                <Button
-                  style={this.props.buttonStyle}
-                  onClick={() => this.setState({ recording: true })}
-                >
-                  {this.props.buttonText}
-                </Button>
-              )}
-
-              {this.state.recording && (
-                <div>
-                  <div>Training AI: {percentage}%</div>
-                  <Line
-                    percent={percentage}
-                    strokeWidth="3"
-                    strokeColor="#0C6CD4"
-                  />
-                </div>
-              )}
             </GridCol>
-            <UserVideoStream
-              imageSize={this.props.dataImageSize}
-              onVideoStreamUpdated={this.onVideoStreamUpdated}
-            />
+            <GridCol>
+              <UserVideoStream
+                imageSize={this.props.dataImageSize}
+                onVideoStreamUpdated={this.onVideoStreamUpdated}
+              />
+            </GridCol>
+            {!this.state.recording && (
+              <Button
+                style={this.props.buttonStyle}
+                onClick={() => this.setState({ recording: true })}
+              >
+                {this.props.buttonText}
+              </Button>
+            )}
+            {this.state.recording && (
+              <div style={{ width: "100%" }}>
+                <div>Training AI: {percentage}%</div>
+                <Line
+                  percent={percentage}
+                  strokeWidth="3"
+                  strokeColor="#0C6CD4"
+                />
+              </div>
+            )}
           </section>
         </GridContainer>
       </main>

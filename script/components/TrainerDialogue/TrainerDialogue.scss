@@ -1,6 +1,12 @@
+@import '../manifest.scss';
+
 .trainer-graphic {
   flex: 1;
 }
 .trainer-speech {
   flex: 3;
+}
+.trainer-speech h1 {
+  @include basicReset;
+  font-size: $font-large;
 }
