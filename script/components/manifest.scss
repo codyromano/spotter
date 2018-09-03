@@ -4,8 +4,8 @@ $color-accent: #96A492;
 $color-accent-contrast: #fff;
 
 $font-base: 'Hind', sans-serif;
-$font-small: 1.25rem;
-$font-medium: 1.35rem;
+$font-small: 1.15rem;
+$font-medium: 1.25rem;
 $font-large: 1.5rem;
 
 $grid-container-max-width: 40rem;
@@ -15,7 +15,6 @@ $grid-row: 1.5rem;
 strong { text-decoration: underline; }
 
 @mixin basicReset {
-  user-select: none;
   margin: 0;
   padding: 0;
   box-sizing: border-box;

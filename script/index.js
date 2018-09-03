@@ -13,11 +13,10 @@ const knn = new ImageClassifier();
 // Start loading behind the scenes during the intro
 knn.load();
 
-
 const KNN_CLASS_ID_GOOD = 'correctPosture';
 const KNN_CLASS_ID_BAD = 'incorrectPosture';
 const IMAGE_SIZE = 227;
-const EXAMPLES_PER_SESSION = 100;
+const EXAMPLES_PER_SESSION = 2000;
 
 knn.addClass(KNN_CLASS_ID_GOOD, 'Examples of correct posture');
 knn.addClass(KNN_CLASS_ID_BAD, 'Examples of incorrect posture');

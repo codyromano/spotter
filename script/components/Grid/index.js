@@ -10,3 +10,7 @@ export const GridContainer = (props) => (
 export const GridCol = (props) => (
   <div className="grid-col" {...props}>{props.children}</div>
 );
+
+export const GridRow = (props) => (
+  <div className="grid-row" {...props}>{props.children}</div>
+);

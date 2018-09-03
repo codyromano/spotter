@@ -2,11 +2,18 @@
 
 .trainer-graphic {
   flex: 1;
+
+  img {
+    max-width: 100%;
+  }
 }
 .trainer-speech {
   flex: 3;
 }
 .trainer-speech h1 {
   @include basicReset;
+  font-size: $font-large;
+}
+.trainer-title {
   font-size: $font-large;
 }
