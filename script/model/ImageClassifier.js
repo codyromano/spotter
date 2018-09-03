@@ -41,25 +41,30 @@ export default class ImageClassifier {
     return this.knn.getClassExampleCount()[classMetadataIndex];
   }
 
+  // TODO: async / await
   predict(imageNode, confidenceThreshold = 80) {
     const imagePixelData = dl.fromPixels(imageNode);
     if (!this.examples) {
       return Promise.resolve([]);
     }
+    let match = null;
+
     return this.knn.predictClass(imagePixelData).then(res => {
-      const matchedClasses = [];
-
-      console.log(res.confidences.join(', '));
-
       for (let i=0; i<NUM_CLASSES; i++){
         // Make the predicted class bold
         if (res.classIndex == i){
           if (res.confidences[i] * 100 >= confidenceThreshold) {
-            matchedClasses.push(this.classMetadata[i]);
+            match = {
+              classId: this.classMetadata[i].id,
+              confidence: res.confidences[i]
+            };
+            break;
           }
         }
       }
-      return Promise.resolve(matchedClasses);
+    }).then(() => {
+      imagePixelData.dispose();
+      return Promise.resolve(match);
     });
   }
 }

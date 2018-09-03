@@ -9,7 +9,9 @@ class WorkoutSession extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      knnLoaded: false
+      knnLoaded: false,
+      classId: null,
+      confidence: 0
     };
     this.onVideoStreamUpdated = this.onVideoStreamUpdated.bind(this);
   }
@@ -21,7 +23,10 @@ class WorkoutSession extends React.Component {
       const model = this.props.imageClassifier;
 
       model.predict(this.imageNode).then(result => {
-        console.log(result);
+        if (result) {
+          const { classId, confidence } = result;
+          this.setState({ classId, confidence });
+        }
       });
     }
     setTimeout(() => {
@@ -35,9 +40,16 @@ class WorkoutSession extends React.Component {
     this.predictionCycle();
   }
   render() {
+    // TODO: Use constant
+    const statusNoun = this.state.classId === 'correctPosture' ? 'correct' : 'wrong';
     return (
       <main>
         <GridContainer>
+          {!!this.state.confidence && (
+            <div>
+              I&apos;m {Math.round(this.state.confidence * 100)}% sure that&apos;s {statusNoun}.
+            </div>
+          )}
           <UserVideoStream
             imageSize={this.props.dataImageSize}
             onVideoStreamUpdated={this.onVideoStreamUpdated}

@@ -16,8 +16,11 @@ export default class UserVideoStream extends React.Component {
 
     navigator.mediaDevices.getUserMedia({video: true, audio: false})
     .then((stream) => {
-      this.videoNode.srcObject = stream;
+      this.videoNode.width = this.props.imageSize;
+      this.videoNode.height = this.props.imageSize;
+
       this.videoDataNode.srcObject = stream;
+      this.videoNode.srcObject = stream;
     });
 
     this.videoNode.addEventListener('playing', ()=> this.videoPlaying = true);
@@ -28,18 +31,20 @@ export default class UserVideoStream extends React.Component {
     );
   }
   onVideoStreamUpdated() {
+    // TODO: Debounce this method to improve performance
     if (this.videoPlaying) {
-      this.props.onVideoStreamUpdated(this.videoDataNode);
+      this.props.onVideoStreamUpdated(this.videoNode);
     }
     window.requestAnimationFrame(this.onVideoStreamUpdated);
   }
   componentWillUnmount() {
+    this.videoDataNode = null;
+    this.videoNode = null;
     window.cancelAnimationFrame(this.videoStreamUpdateCycle);
   }
   render() {
     return (
       <video
-        style={{ width: '100%', height: '100%' }}
         ref={(node) => {
           this.videoNode = node;
         }}
