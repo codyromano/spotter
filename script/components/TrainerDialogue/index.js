@@ -23,7 +23,7 @@ export const PrivacyNotice = () => (
     your posture. This is <strong>completely private</strong>. The images never
     leave your device.</p>
 
-    <Button to="/train/bad">Enable Camera</Button>
+    <Button to={routes.TRAIN_BAD}>Enable Camera</Button>
   </TrainerDialogue>
 );
 
@@ -31,7 +31,7 @@ export const IntroPage = () => (
   <TrainerDialogue>
     <h1>I&apos;m Spotter, a personal trainer AI.</h1>
     <p>Proper form is key to preventing injuries. I can tell you when your posture is incorrect. </p>
-    <Button to="/privacy">Get Started</Button>
+    <Button to={routes.PRIVACY}>Get Started</Button>
   </TrainerDialogue>
 );
 

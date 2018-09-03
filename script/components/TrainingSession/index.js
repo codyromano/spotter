@@ -19,7 +19,8 @@ class TrainingSession extends React.Component {
     this.progressReport = this.progressReport.bind(this);
   }
   onVideoStreamUpdated(imageNode) {
-    const examplesCaptured = this.props.imageClassifier.getExamplesForClass(this.props.classId);
+    const examplesCaptured = this.props.imageClassifier
+      .getExamplesForClass(this.props.classId);
 
     if (
       this.state.knnLoaded &&
@@ -41,7 +42,8 @@ class TrainingSession extends React.Component {
     window.clearInterval(this.reportInterval);
   }
   progressReport() {
-    const examplesCaptured = this.props.imageClassifier.getExamplesForClass(this.props.classId);
+    const examplesCaptured = this.props.imageClassifier
+      .getExamplesForClass(this.props.classId);
 
     if (this.state.examplesCaptured >= this.props.examplesNeeded) {
       this.props.onTrainingComplete();

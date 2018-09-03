@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { render } from 'react-dom';
 import { HashRouter, Switch, Route } from 'react-router-dom';
 import { TrainerDialogue, IntroPage, PrivacyNotice, TrainBadDone, TrainGoodDone } from './components/TrainerDialogue';
+import WorkoutSession from './components/WorkoutSession';
 import TrainingSession from './components/TrainingSession';
 import ImageClassifier from './model/ImageClassifier';
 import * as routes from './routes';
@@ -54,9 +55,22 @@ const TrainGood = (props) => (
   />
 );
 
+const Workout = (props) => (
+  <WorkoutSession
+    dataImageSize={IMAGE_SIZE}
+    imageClassifier={knn}
+    {...props}
+  />
+);
+
 const App = () => (
   <HashRouter>
     <Switch>
+      <Route
+        path={routes.WORKOUT}
+        exact={true}
+        component={Workout}
+      />
       <Route
         path={routes.TRAIN_BAD}
         exact={true}

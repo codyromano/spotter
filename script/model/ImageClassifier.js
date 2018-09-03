@@ -13,6 +13,7 @@ export default class ImageClassifier {
     this.classMetadataIndex = 0;
     this.classMetadata = {};
     this.mapClassIdToIndex = {};
+    this.examples = 0;
   }
 
   addClass(id, label) {
@@ -27,12 +28,12 @@ export default class ImageClassifier {
   }
 
   addImage(imageNode, classMetadataId) {
+    this.examples += 1;
+
     const index = this.mapClassIdToIndex[classMetadataId];
     const imagePixelData = dl.fromPixels(imageNode);
     this.knn.addImage(imagePixelData, index);
-
-    // TODO: Reinstate
-    // imagePixelData.dispose();
+    imagePixelData.dispose();
   }
 
   getExamplesForClass(classId) {
@@ -40,13 +41,15 @@ export default class ImageClassifier {
     return this.knn.getClassExampleCount()[classMetadataIndex];
   }
 
-  predict(imagePixelData, confidenceThreshold = 80) {
-    const exampleCount = this.knn.getClassExampleCount();
-    if (exampleCount < 1) {
-      return [];
+  predict(imageNode, confidenceThreshold = 80) {
+    const imagePixelData = dl.fromPixels(imageNode);
+    if (!this.examples) {
+      return Promise.resolve([]);
     }
-    return this.knn.predictClass(image).then(res => {
+    return this.knn.predictClass(imagePixelData).then(res => {
       const matchedClasses = [];
+
+      console.log(res.confidences.join(', '));
 
       for (let i=0; i<NUM_CLASSES; i++){
         // Make the predicted class bold

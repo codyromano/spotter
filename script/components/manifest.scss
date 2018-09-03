@@ -14,6 +14,7 @@ $grid-column-gutter: 1.5rem;
 strong { text-decoration: underline; }
 
 @mixin basicReset {
+  user-select: none;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
