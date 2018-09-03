@@ -8,6 +8,7 @@ module.exports = {
     publicPath: "/public/",
     filename: "./public/generated/bundle.js"
   },
+  devtool: "eval-source-map",
   devServer: {
     contentBase: path.join(__dirname, "public"),
     compress: true,
