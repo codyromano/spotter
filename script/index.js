@@ -9,6 +9,11 @@ import ImageClassifier from './model/ImageClassifier';
 import * as routes from './routes';
 
 const knn = new ImageClassifier();
+
+// Start loading behind the scenes during the intro
+knn.load();
+
+
 const KNN_CLASS_ID_GOOD = 'correctPosture';
 const KNN_CLASS_ID_BAD = 'incorrectPosture';
 const IMAGE_SIZE = 227;

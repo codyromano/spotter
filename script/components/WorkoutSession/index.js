@@ -48,7 +48,7 @@ class WorkoutSession extends React.Component {
         statusNoun = 'Okay';
       break;
       case 'incorrectPosture':
-        statusNoun = 'Be careful!';
+        statusNoun = 'Careful!';
       break;
     }
 
