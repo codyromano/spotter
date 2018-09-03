@@ -1,0 +1,29 @@
+.class-prediction {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: 10vw;
+  color: #fff;
+}
+
+.class-prediction {
+  display: flex;
+}
+.trainer-thumb {
+  width: 5rem;
+}
+.prediction-text {
+  opacity: 0.75;
+}
+
+/*
+<div className="class-prediction">
+  <img src="./images/trainer.jpg" className="trainer-thumb" />
+  <div className="prediction-text">{statusNoun}</div>
+</div>
+*/

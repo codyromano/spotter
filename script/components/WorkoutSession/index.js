@@ -40,16 +40,24 @@ class WorkoutSession extends React.Component {
     this.predictionCycle();
   }
   render() {
+    let statusNoun = '';
+
     // TODO: Use constant
-    const statusNoun = this.state.classId === 'correctPosture' ? 'correct' : 'wrong';
+    switch (this.state.classId) {
+      case 'correctPosture':
+        statusNoun = 'Okay';
+      break;
+      case 'incorrectPosture':
+        statusNoun = 'Be careful!';
+      break;
+    }
+
     return (
       <main>
         <GridContainer>
-          {!!this.state.confidence && (
-            <div>
-              I&apos;m {Math.round(this.state.confidence * 100)}% sure that&apos;s {statusNoun}.
-            </div>
-          )}
+          <div className="class-prediction">
+            <div className="prediction-text">{statusNoun}</div>
+          </div>
           <UserVideoStream
             imageSize={this.props.dataImageSize}
             onVideoStreamUpdated={this.onVideoStreamUpdated}
@@ -61,7 +69,7 @@ class WorkoutSession extends React.Component {
 }
 
 WorkoutSession.defaultProps = {
-  predictionInterval: 2500
+  predictionInterval: 1000
 };
 
 WorkoutSession.propTypes = {

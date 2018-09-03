@@ -8,18 +8,21 @@ export default class UserVideoStream extends React.Component {
     this.videoDataNode = document.createElement('video');
   }
   componentDidMount() {
-    this.videoDataNode.width = this.props.imageSize;
-    this.videoDataNode.height = this.props.imageSize;
-
     this.videoNode.setAttribute('autoplay', '');
     this.videoNode.setAttribute('playsinline', '');
+
+    // We need two streams because one must be 227 pixels for SqueezeNet
+    navigator.mediaDevices.getUserMedia({video: true, audio: false})
+      .then((stream) => {
+        this.videoDataNode.width = this.props.imageSize;
+        this.videoDataNode.height = this.props.imageSize;
+        this.videoDataNode.srcObject = stream;
+      });
 
     navigator.mediaDevices.getUserMedia({video: true, audio: false})
     .then((stream) => {
       this.videoNode.width = this.props.imageSize;
       this.videoNode.height = this.props.imageSize;
-
-      this.videoDataNode.srcObject = stream;
       this.videoNode.srcObject = stream;
     });
 
@@ -45,6 +48,7 @@ export default class UserVideoStream extends React.Component {
   render() {
     return (
       <video
+        style={{ width: '100%', height: '100%'}}
         ref={(node) => {
           this.videoNode = node;
         }}

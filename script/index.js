@@ -30,7 +30,7 @@ const TrainBad = (props) => (
     dataImageSize={IMAGE_SIZE}
     classId={KNN_CLASS_ID_BAD}
     examplesNeeded={EXAMPLES_PER_SESSION}
-    buttonText="Demonstrate bad form"
+    buttonText="Start recording"
     buttonStyle={{backgroundColor: "#EC2434", color: "#fff"}}
     {...props}
   />
@@ -49,7 +49,7 @@ const TrainGood = (props) => (
     dataImageSize={IMAGE_SIZE}
     classId={KNN_CLASS_ID_GOOD}
     examplesNeeded={EXAMPLES_PER_SESSION}
-    buttonText="Demonstrate good form"
+    buttonText="Start recording"
     buttonStyle={{backgroundColor: "#0C6CD4", color: "#fff"}}
     {...props}
   />
