@@ -16,6 +16,7 @@ class TrainingSession extends React.Component {
       examplesCaptured: 0
     };
     this.onVideoStreamUpdated = this.onVideoStreamUpdated.bind(this);
+    this.onVideoStreamError = this.onVideoStreamError.bind(this);
     this.progressReport = this.progressReport.bind(this);
   }
   onVideoStreamUpdated(imageNode) {
@@ -28,6 +29,13 @@ class TrainingSession extends React.Component {
       examplesCaptured < this.props.examplesNeeded
     ) {
       this.props.imageClassifier.addImage(imageNode, this.props.classId);
+    }
+  }
+  onVideoStreamError() {
+    if (!this.state.cameraError) {
+      this.setState({
+        cameraError: true
+      });
     }
   }
   // TODO: Update build system to use async/await
@@ -60,6 +68,8 @@ class TrainingSession extends React.Component {
       (this.state.examplesCaptured / this.props.examplesNeeded) * 100
     );
 
+    // TODO: Conditionals for cameraError are kind of hackey. Abstract this
+    // to a higher-order component
     return (
       <main>
         <GridContainer>
@@ -68,12 +78,23 @@ class TrainingSession extends React.Component {
               {this.props.instructions}
             </GridCol>
             <GridCol>
-              <UserVideoStream
-                imageSize={this.props.dataImageSize}
-                onVideoStreamUpdated={this.onVideoStreamUpdated}
-              />
+              {!this.state.cameraError && (
+                <UserVideoStream
+                  imageSize={this.props.dataImageSize}
+                  onVideoStreamUpdated={this.onVideoStreamUpdated}
+                  onVideoStreamError={this.onVideoStreamError}
+                  />
+              )}
+              {this.state.cameraError && (
+                <div style={{color: "red"}}>
+                  Either your device doesn&apos;t have a camera or you haven&apos;t
+                  given me permission to use it. ☹️ Please reload the page and be
+                  sure to click <em>Accept</em>. The video stays on your device.
+                  I don&apos;t send the data anywhere.
+                </div>
+              )}
             </GridCol>
-            {!this.state.recording && (
+            {!this.state.recording && !this.state.cameraError && (
               <Button
                 style={this.props.buttonStyle}
                 onClick={() => this.setState({ recording: true })}

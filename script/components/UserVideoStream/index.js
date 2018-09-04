@@ -14,6 +14,8 @@ export default class UserVideoStream extends React.Component {
     navigator.mediaDevices.getUserMedia({video: true, audio: false})
     .then((stream) => {
       this.videoNode.srcObject = stream;
+    }).catch(() => {
+      this.props.onVideoStreamError();
     });
 
     this.videoNode.addEventListener('playing', ()=> this.videoPlaying = true);
@@ -49,7 +51,12 @@ export default class UserVideoStream extends React.Component {
   }
 }
 
+UserVideoStream.defaultProps = {
+  onVideoStreamError: () => {}
+};
+
 UserVideoStream.propTypes = {
   imageSize: PropTypes.number.isRequired,
-  onVideoStreamUpdated: PropTypes.func.isRequired
+  onVideoStreamUpdated: PropTypes.func.isRequired,
+  onVideoStreamError: PropTypes.func
 };
